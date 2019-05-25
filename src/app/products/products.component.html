@@ -1,0 +1,49 @@
+<div class="wrapper">
+  <div class="nodes" *ngIf="selectedProducts?.length > 0">
+      intrested in: 
+      <span  *ngFor="let selectedProduct of selectedProducts" class="node"> {{selectedProduct?.name}} <i class="fa fa-times remove" (click)="updateSelectedProducts(selectedProduct)"></i></span>
+    </div> 
+  <div class="container">
+    <div class="header">
+        <i *ngIf="selectedLine" class="fa fa-home" (click)="clear()"></i>
+        <div class="nav" *ngIf="selectedLine" (click)="clearSelectedCategory()">{{selectedLine?.name}} <i class="fa fa-chevron-right" aria-hidden="true"></i> </div>
+  
+        <div class="nav" *ngIf="selectedCategory">{{selectedCategory?.name }}<i class="fa fa-chevron-right" aria-hidden="true"></i> </div>
+  
+        <div class="search">
+          <i class="fa fa-search" aria-hidden="true"></i>
+          <input type="text" [(ngModel)]="fieldValue" placeholder="{{selectedCategory ? 'Search for a product...' : selectedLine? 'Search for a category' : 'Search for a medical line'}}">
+        </div>
+  
+    </div>
+  
+    <div class="components">
+      <div class="medical-line" [ngClass]="{'expanded': !selectedCategory}">
+        <div *ngFor="let medLine of filteredLines " class="item main" [ngClass]="{'active': medLine?.name == selectedLine?.name}" (click)="selectLine(medLine)">
+          <i class="fa" [ngClass]="medLine.icon" aria-hidden="true"></i>
+          <span class="title">
+            {{medLine.name}}
+          </span>
+          <i class="fa fa-chevron-right arrow" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="category">
+        <div *ngIf="!selectedLine" class="zeroState">Select a medical line to explore products</div>
+        <div *ngFor="let category of filteredCategories" class="item" (click)="selectCategory(category)">{{category.name}}</div>
+  
+        <div *ngIf="!selectedCategory" class="barrier"></div>
+      </div>
+      <div class="products" [ngClass]="{'expanded': selectedCategory}">
+        <div *ngFor="let product of filteredProducts" class="item">
+            <label class="control control-checkbox">
+                {{product.name}}
+                    <input type="checkbox" (change)="updateSelectedProducts(product)" [checked]="selectedProducts.indexOf(product) != -1"/>
+                <div class="control_indicator"></div>
+            </label>
+        </div>
+        <div class="barrier"></div>
+      </div>
+    </div>
+  
+  </div>
+</div>

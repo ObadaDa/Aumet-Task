@@ -1,0 +1,261 @@
+$nav-color: rgb(25, 145, 235);
+.wrapper {
+    margin: 9% auto;
+    width: 60%;
+    .nodes {
+        display: inline-block;
+        margin-bottom: 10px;
+        
+        .node {
+            position: relative;
+            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #4daeef), color-stop(1, #1a91ec));
+            background:-moz-linear-gradient(top, #4daeef 5%, #1a91ec 100%);
+            background:-webkit-linear-gradient(top, #4daeef 5%, #1a91ec 100%);
+            background:-o-linear-gradient(top, #4daeef 5%, #1a91ec 100%);
+            background:-ms-linear-gradient(top, #4daeef 5%, #1a91ec 100%);
+            background:linear-gradient(to bottom, #4daeef 5%, #1a91ec 100%);
+            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#4daeef', endColorstr='#1a91ec',GradientType=0);
+            background-color:#4daeef;
+            -moz-border-radius:25px;
+            -webkit-border-radius:25px;
+            border-radius:25px;
+            border:2px solid #1990eb;
+            display:inline-block;
+            color:#ffffff;
+            font-family:Arial;
+            font-size:15px;
+            padding: 10px 30px;
+            margin: 5px;
+
+            .remove {
+                position: absolute;
+                right: 8px;
+                top: 25%;
+                color: #84c8f4;
+                cursor: pointer;
+            }
+        }
+    }
+    .container {
+        border: 1px solid rgb(155, 155, 155);
+        height: 60%;
+        border-radius: 4px;
+    
+        .header {
+            height: 40px;
+            border-bottom: 1px solid #9b9b9b;
+            padding: 10px 15px;
+            display: flex;
+    
+            i {
+                color:  $nav-color;
+                font-size: 2.3em;
+                margin-right: 15px;
+                cursor: pointer;
+            }
+    
+            .nav {
+                color:  $nav-color;
+                font-size: 18px;
+                text-align: center;
+                line-height: 2.4;
+                cursor: pointer;
+    
+                i {
+                    color:  black;
+                    margin: 0 10px;
+                    font-size: 15px;
+                }
+            }
+    
+            .search {
+                border-bottom: 1px solid rgb(155, 155, 155);
+                padding-top: 12px;
+    
+                i {
+                    color:  rgb(155, 155, 155);
+                    margin: 0 7px;
+                    font-size: 15px;
+                }
+    
+                input {
+                    border: none;
+                    font-size: 15px;
+    
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+        }
+    
+        .components {
+            display: flex;
+            justify-content: center;
+            height: 335px;
+            overflow: hidden;
+            
+            >div{
+                position: relative;
+                width: 0;
+                overflow: auto;
+    
+                transition: 0.4s;
+    
+                &.category, &.expanded {
+                    width: calc(50% - 1px) !important;
+    
+                    .zeroState {
+                        font-size: 18px;
+                        position: absolute;
+                        top: 45%;
+                        left: 8%;
+                        color: rgb(115, 120, 125);
+                        opacity: 0.5;
+                    }
+                }
+    
+                .barrier {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    height: 100%;
+                    width: 0px;
+                    border-right: 1px solid rgb(198, 204, 210);
+                    margin-left: 1px;
+                }
+    
+                .item {
+                    display: flex;
+                    padding: 10px;
+                    cursor: pointer;
+    
+                    &:last-child {
+                        border: none;
+                    }
+    
+                    &:hover, &.active {
+                        background-color: rgb(241, 242, 244);
+    
+                        .arrow {
+                            display: inline;
+                        }
+                    }
+    
+                    &.main {
+                        border-bottom: 1px solid rgb(198, 204, 210);
+                    }
+    
+                    i {
+                        font-size: 2em;
+                        margin: 10px;
+                        line-height: 1.2;
+                    }
+    
+                    .title {
+                        flex-grow: 1;
+                        padding-left: 20px;
+                        font-size: 18px;
+                        line-height: 3.5;
+                    }
+    
+                    .arrow {
+                        display: none;
+                        font-size: 1.5em;
+                        line-height: 1.8;
+                        color: rgb(202, 207, 214);
+                    }
+    
+    
+    
+                    .control {
+                        font-family: arial;
+                        display: block;
+                        position: relative;
+                        padding-left: 30px;
+                        margin-bottom: 0px;
+                        padding-top: 6px;
+                        cursor: pointer;
+                        font-size: 15px;
+                    }
+                    .control input {
+                        position: absolute;
+                        z-index: -1;
+                        opacity: 0;
+                    }
+                    .control_indicator {
+                        position: absolute;
+                        top: 3px;
+                        left: 0;
+                        height: 20px;
+                        width: 20px;
+                        background: #ffffff;
+                        border: 1px solid #c6ccd2;
+                        border-radius: 5px;
+                    }
+                    .control-radio .control_indicator {
+                        border-radius: 3px;
+                    }
+                    
+                    .control:hover input ~ .control_indicator,
+                    .control input:focus ~ .control_indicator {
+                        background: #e2dddd;
+                    }
+                    
+                    .control input:checked ~ .control_indicator {
+                        background: #27bfab;
+                    }
+                    .control input:disabled ~ .control_indicator {
+                        background: #e6e6e6;
+                        opacity: 0.6;
+                        pointer-events: none;
+                    }
+                    .control_indicator:after {
+                        box-sizing: unset;
+                        content: '';
+                        position: absolute;
+                        display: none;
+                    }
+                    .control input:checked ~ .control_indicator:after {
+                        display: block;
+                    }
+                    .control-checkbox .control_indicator:after {
+                        left: 7px;
+                        top: 3px;
+                        width: 3px;
+                        height: 8px;
+                        border: solid #ffffff;
+                        border-width: 0 2px 2px 0;
+                        transform: rotate(45deg);
+                    }
+                    .control-checkbox input:disabled ~ .control_indicator:after {
+                        border-color: #7b7b7b;
+                    }
+                }
+    
+                &::-webkit-scrollbar {
+                    width: 6px;
+                    height: 6px;
+                    z-index: 999999;
+                }
+                &::-webkit-scrollbar-button {
+                    width: 0px;
+                    height: 0px;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: #bcbcbc;
+                    border: 0px none #ffffff;
+                    border-radius: 50px;
+                }
+                &::-webkit-scrollbar-track {
+                    background: #ffffff;
+                    border: 0px none #ffffff;
+                    border-radius: 20px;
+                }
+                &::-webkit-scrollbar-corner {
+                    background: transparent;
+                }
+            }
+        }
+    }
+}
